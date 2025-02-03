@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 public class Main {
 
-    // hello world method
+    // hello world method (task 1)
     static void printWorld() {
         System.out.println("Hello world");
     }
 
-    // method to take the users name
+    // method to take the users name (task 2)
     static String getUserName(Scanner scanner) {
         System.out.println("What is your name?");
         return scanner.next(); // Read and return the user's name
     }
 
-    // method to calculate the area of a rectangle
+    // method to calculate the area of a rectangle (Task 3)
     static double calculateArea(double length, double height) {
         return length * height; // final calculation
     }
@@ -33,7 +33,7 @@ public class Main {
         System.out.println("Your Area is " + area);
     }
 
-    // method to calculate and display the average of two numbers
+    // method to calculate and display the average of two numbers (task 4)
     static void calculateAverage(Scanner scanner) {
         System.out.println("Enter the first number:");
         double num1 = scanner.nextDouble();
@@ -47,12 +47,25 @@ public class Main {
         // print the result to user
         System.out.println("The average of " + num1 + " and " + num2 + " is " + average);
     }
+    static void swapAndDisplay(Scanner scanner) {
+        // Ask the user for two integers (task 5)
+        System.out.print("Enter the first integer: ");
+        int firstNumber = scanner.nextInt();
 
-    // Main method - calls other functions
+        System.out.print("Enter the second integer: ");
+        int secondNumber = scanner.nextInt();
+
+        // Display the original order
+        System.out.println(" Normal Order: " + firstNumber + " " + secondNumber);
+
+        // Swap and display the reversed order
+        System.out.println("Reversed Order: " + secondNumber + " " + firstNumber);
+    }
+    // main calls other functions
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        printWorld(); // Call method to print "Hello world"
+        printWorld(); // call method to print "Hello world"
 
         String personName = getUserName(scanner); // record user name
         System.out.println("Hello " + personName); // print hello *name*
@@ -61,7 +74,9 @@ public class Main {
 
         calculateAverage(scanner); // calculate average of any two numbers
 
-        scanner.close(); // close scanner for cleaner code
+        swapAndDisplay(scanner); //call on swap and display numbers in original and reverse order.
+
+        scanner.close(); // close scanner for cleaner code (at the end because a majority of functions use scanner
     }
 }
 
