@@ -1,5 +1,6 @@
 package Logbook.Week1;
 
+import java.time.Year; // this was done automatically by IntelliJ and is used for question 6 it imports the current year to simplify the calculation
 import java.util.Scanner;
 
 public class Main {
@@ -61,6 +62,15 @@ public class Main {
         // Swap and display the reversed order
         System.out.println("Reversed Order: " + secondNumber + " " + firstNumber);
     }
+    static void birthYear(Scanner scanner) {
+    int currentYear = Year.now().getValue();
+    System.out.print("How old are you");
+    int age = scanner.nextInt(); //Next int meaning to record the entry as long as its an int
+    int birthYear = currentYear - age; //the formula for calculating the birth year of user
+    System.out.println("Your year of birth " + birthYear); //the final result printed
+    }
+
+
     // main calls other functions
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -76,7 +86,10 @@ public class Main {
 
         swapAndDisplay(scanner); //call on swap and display numbers in original and reverse order.
 
+        birthYear(scanner); // find the birth year of the user
+
         scanner.close(); // close scanner for cleaner code (at the end because a majority of functions use scanner
+
     }
 }
 
