@@ -1,44 +1,69 @@
 package Logbook.Week1;
-//I have changed the arrangement of the code therefore now it will call each method as a step
+
 import java.util.Scanner;
 
 public class Main {
 
-    //method printing "Hello world"
-    static void World() {
+    // hello world method
+    static void printWorld() {
         System.out.println("Hello world");
     }
 
-   // removed the input handling and methods from the main class and reorganised.
-    static void calculateArea() {
-        Scanner scanner = new Scanner(System.in); //reading the user input by using scanner.
+    // method to take the users name
+    static String getUserName(Scanner scanner) {
+        System.out.println("What is your name?");
+        return scanner.next(); // Read and return the user's name
+    }
 
+    // method to calculate the area of a rectangle
+    static double calculateArea(double length, double height) {
+        return length * height; // final calculation
+    }
+
+    // method to get rectangle dimensions
+    static void getRectangleDimensions(Scanner scanner) {
         System.out.println("What is the length of your rectangle?");
         double length = scanner.nextDouble();
 
         System.out.println("What is the height of your rectangle?");
         double height = scanner.nextDouble();
 
-        double area = length * height;
-        System.out.println("Your Area is " + area); //the formula the code will use to calculate the area.
-
-        scanner.close(); // Close the scanner for cleaner code
+        // call area function and display result
+        double area = calculateArea(length, height);
+        System.out.println("Your Area is " + area);
     }
 
-    // call on the main method
+    // method to calculate and display the average of two numbers
+    static void calculateAverage(Scanner scanner) {
+        System.out.println("Enter the first number:");
+        double num1 = scanner.nextDouble();
+
+        System.out.println("Enter the second number:");
+        double num2 = scanner.nextDouble();
+
+        // formula to calculate average
+        double average = (num1 + num2) / 2;
+
+        // print the result to user
+        System.out.println("The average of " + num1 + " and " + num2 + " is " + average);
+    }
+
+    // Main method - calls other functions
     public static void main(String[] args) {
-
-        Main.World();
-
-        // ask for user name
-        System.out.println("What is your name?");
         Scanner scanner = new Scanner(System.in);
-        String personName = scanner.next();
-        System.out.println("Hello " + personName); // Print greeting
 
-        // here i just called on the method for area to run after the name has been taken.
-        calculateArea();
+        printWorld(); // Call method to print "Hello world"
 
-        scanner.close(); // Close scanner
+        String personName = getUserName(scanner); // record user name
+        System.out.println("Hello " + personName); // print hello *name*
+
+        getRectangleDimensions(scanner); // prompt the user for length and width
+
+        calculateAverage(scanner); // calculate average of any two numbers
+
+        scanner.close(); // close scanner for cleaner code
     }
 }
+
+
+
