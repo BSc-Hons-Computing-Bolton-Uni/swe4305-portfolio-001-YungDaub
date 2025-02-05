@@ -10,19 +10,30 @@ public class Main {
         System.out.println("Hello world");
     }
 
-    // method to take the users name (task 2)
+    /* the getUserName function uses the scanner in order to record
+    the name of the user to read and return it.
+     (task 2)
+     */
     static String getUserName(Scanner scanner) {
         System.out.println("What is your name?");
         return scanner.next(); // Read and return the user's name
     }
 
-    // method to calculate the area of a rectangle (Task 3)
+    /* The calculateArea function is used to find use the user input
+
+    (Task 3)
+     */
     static double calculateArea(double length, double height) {
         return length * height; // final calculation
     }
 
     // method to get rectangle dimensions
     static void getRectangleDimensions(Scanner scanner) {
+        /*
+        The getRectangleDimensions function will take the dimensions from the user
+        using scanner in order to calculate the answer using the calculateArea function.
+
+         */
         System.out.println("What is the length of your rectangle?");
         double length = scanner.nextDouble();
 
@@ -36,6 +47,10 @@ public class Main {
 
     // method to calculate and display the average of two numbers (task 4)
     static void calculateAverage(Scanner scanner) {
+        /* The calculateAverage function will take two numbers
+        from the user before calculating the average of them both.
+        To do this we will create a formula seen below in the code
+        */
         System.out.println("Enter the first number:");
         double num1 = scanner.nextDouble();
 
@@ -49,7 +64,12 @@ public class Main {
         System.out.println("The average of " + num1 + " and " + num2 + " is " + average);
     }
     static void swapAndDisplay(Scanner scanner) {
-        // Ask the user for two integers (task 5)
+        /*
+        The swapAndDisplay function tasks us with taking two integers
+         from the user and then displaying them in the order they were entered
+         then displaying them in reverse order.
+         (task 5)
+         */
         System.out.print("Enter the first integer: ");
         int firstNumber = scanner.nextInt();
 
@@ -62,7 +82,13 @@ public class Main {
         // Swap and display the reversed order
         System.out.println("Reversed Order: " + secondNumber + " " + firstNumber);
     }
-    static void birthYear(Scanner scanner) {
+    static void birthYear(Scanner scanner){
+    /* the BirthYear function will use an implementation from the Java in built library
+    (import java.time.Year;) this will allow for the current date to be pulled
+    and automatically updated to use the current date.
+    (task 6)
+
+     */
     int currentYear = Year.now().getValue();
     System.out.print("How old are you");
     int age = scanner.nextInt(); //Next int meaning to record the entry as long as its an int
