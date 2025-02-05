@@ -1,7 +1,10 @@
 package Logbook.Week1;
 
+import java.time.LocalDate;
 import java.time.Year; // this was done automatically by IntelliJ and is used for question 6 it imports the current year to simplify the calculation
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
+
 
 public class Main {
 
@@ -95,6 +98,18 @@ public class Main {
     int birthYear = currentYear - age; //the formula for calculating the birth year of user
     System.out.println("Your year of birth " + birthYear); //the final result printed
     }
+     static void calculateDaysOld (Scanner scanner) {
+        System.out.print("Enter the year you were born (YYYY):");
+        int birthYear = scanner.nextInt();
+    System.out.print("Enter the month you were born (M):");
+    int birthMonth = scanner.nextInt();
+    System.out.print("Enter the day you were born (DD):");
+    int birthDay = scanner.nextInt(); //repeat the process of storing data
+         LocalDate birthDate = LocalDate.of(birthYear,birthMonth,birthDay);
+         LocalDate today =  LocalDate.now();
+         long daysOld = ChronoUnit.DAYS.between(birthDate, today);
+         System.out.println("You are " + daysOld + " days old!");
+}
 
 
     // main calls other functions
@@ -114,6 +129,7 @@ public class Main {
 
         birthYear(scanner); // find the birth year of the user
 
+        calculateDaysOld(scanner);
         scanner.close(); // close scanner for cleaner code (at the end because a majority of functions use scanner
 
     }
