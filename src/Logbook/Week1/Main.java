@@ -108,10 +108,27 @@ public class Main {
          LocalDate birthDate = LocalDate.of(birthYear,birthMonth,birthDay);
          LocalDate today =  LocalDate.now();
          long daysOld = ChronoUnit.DAYS.between(birthDate, today);
-         System.out.println("You are " + daysOld + " days old!");
+         System.out.println("You are " + daysOld + " days old");
 }
-
-
+static void feetToMiles (Scanner scanner){
+        System.out.print ("Enter the Measurement in feet you want to be converted to Miles");
+        int enteredFeet = scanner.nextInt();
+        int Miles = 5280;
+        int finalCalc = (enteredFeet * 5280);
+        System.out.print (enteredFeet +" converted to miles is " + finalCalc);
+}
+static void interestCalculator (Scanner scanner){ /*
+This method will now calculate the interest at the rate of 0.01 throughout the year
+based on the initial deposit given
+*/
+        double interestRate = 0.01; //this is the rate of interest given in question
+        System.out.print( "How much would you like to deposit?" );
+        double depositAmount = scanner.nextDouble();
+        double interestOverTime = (depositAmount * interestRate);
+        double finalAmount = (depositAmount + interestOverTime);
+        System.out.println ("Your interest earned is " + interestOverTime);
+        System.out.println ("Total interest after 1 year " + finalAmount);
+}
     // main calls other functions
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -129,7 +146,12 @@ public class Main {
 
         birthYear(scanner); // find the birth year of the user
 
-        calculateDaysOld(scanner);
+        calculateDaysOld(scanner); // Calculate Days old of the user from their DOB
+
+        feetToMiles(scanner); // Convert the user inputted feet to miles
+
+        interestCalculator(scanner); // calculate interest on an initial deposit from the span of a year
+
         scanner.close(); // close scanner for cleaner code (at the end because a majority of functions use scanner
 
     }

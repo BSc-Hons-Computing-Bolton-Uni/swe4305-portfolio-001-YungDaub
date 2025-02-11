@@ -1,4 +1,4 @@
 package Logbook.Week3;
 
-public class week3 {
+public class Week3 {
 }
