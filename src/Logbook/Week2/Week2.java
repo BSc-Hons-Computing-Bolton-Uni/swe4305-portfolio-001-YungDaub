@@ -149,6 +149,17 @@ static void tableMessage(Scanner scanner) {
         }
     }
 
+    static void evenNumberLoop(Scanner scanner) {
+        System.out.print("Even numbers from 1-20: ");
+        for (int i = 1; i <= 20; i++) {  // loop from 1 to 20
+            if (i % 2 == 0) {  // check if the number is even
+                System.out.println(i);
+            }
+        }
+    }
+
+
+
     public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
@@ -159,5 +170,10 @@ static void tableMessage(Scanner scanner) {
         multiTable(scanner);
         tableMessage(scanner);
         examGrader(scanner);
+        evenNumberLoop(scanner);
     }
 }
+
+
+
+
