@@ -1,6 +1,7 @@
 package Logbook.Week3;
 
-
+import Logbook.Week3.Student;
+import Logbook.Week.Course;
 
 class Main {
     public static void main(String[] args) {
@@ -8,7 +9,8 @@ class Main {
         create separate instance tabs for better organisation and an
         overall easier time when debugging the code
          */
-        Student student = new Student(100184278, "Charlie Daubney"); //Student details (interchangeable)
+        Course course = new Course("SWE4305", "Object Oriented Programming");
+        Student student = new Student(100184278, "Charlie Daubney", course); //Student details (interchangeable)
 
         // Display the student's information
         student.displayStudentInfo(); /*
@@ -23,11 +25,9 @@ class Main {
          Displays the student information entered into student.setname
          */
 
-        Course course = new Course ("SWE4305" , "Object Oriented Programming");
         course.displayCourseinfo(); // Will display the passed through data in the course class
+
     }
 }
-
-
 
 
