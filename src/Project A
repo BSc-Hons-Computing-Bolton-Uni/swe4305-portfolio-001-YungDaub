@@ -1,1 +1,126 @@
+ java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+class Song {
+    private String title;
+    private String artist;
+    private int playCount;
+
+    public Song(String title, String artist, int playCount) {
+        this.title = title;
+        this.artist = artist;
+        this.playCount = playCount;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getPlayCount() {
+        return playCount;
+    }
+
+    @Override
+    public String toString() {
+        return "Title: " + title + ", Artist: " + artist + ", Plays: " + playCount;
+    }
+}
+
+public class MusicApp {
+    private static ArrayList<Song> songList = new ArrayList<>();
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        initializeSongs(); // Load some default songs
+        int choice;
+
+        do {
+            System.out.println("\nMusic Streaming Service");
+            System.out.println("1. Add a new song");
+            System.out.println("2. Remove a song");
+            System.out.println("3. List all songs");
+            System.out.println("4. List songs with plays over a certain number");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1 -> addSong();
+                case 2 -> removeSong();
+                case 3 -> listSongs();
+                case 4 -> listSongsOverPlays();
+                case 5 -> System.out.println("Exiting... Goodbye!");
+                default -> System.out.println("Invalid choice. Try again.");
+            }
+        } while (choice != 5);
+    }
+
+    private static void initializeSongs() {
+        songList.add(new Song("Genesis", "Grimes", 394565480));
+        songList.add(new Song("Crimewave", "Crystal Castles", 248111987));
+        songList.add(new Song("Under Your Spell", "Snow Strippers", 131510002));
+        songList.add(new Song("jeans", "2hollis", 15330851));
+        songList.add(new Song("Poison Tree", "Grouper", 220590984));
+        songList.add(new Song("Romantic Homicide", "d4vd", 1516926368));
+        songList.add(new Song("Trash the Rental: Crystal Castles Remix", "Sohodolls", 2424775));
+        songList.add(new Song("D>E>A>T>H M>E>T>A>L", "Panchiko", 1641871));
+        songList.add(new Song("Karma Police", "Radiohead", 672805201));
+        songList.add(new Song("Delicate Weapon", "Grimes ,Lizzy Wizzy", 19405958));
+    }
+
+    private static void addSong() {
+        System.out.print("Enter song title: ");
+        String title = scanner.nextLine();
+        System.out.print("Enter artist name: ");
+        String artist = scanner.nextLine();
+        System.out.print("Enter play count: ");
+        int playCount = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        songList.add(new Song(title, artist, playCount));
+        System.out.println("Song added successfully!");
+    }
+
+    private static void removeSong() {
+        System.out.print("Enter song title to remove: ");
+        String title = scanner.nextLine();
+        Iterator<Song> iterator = songList.iterator();
+
+        while (iterator.hasNext()) {
+            Song song = iterator.next();
+            if (song.getTitle().equalsIgnoreCase(title)) {
+                iterator.remove();
+                System.out.println("Song removed successfully!");
+                return;
+            }
+        }
+        System.out.println("Song not found.");
+    }
+
+    private static void listSongs() {
+        if (songList.isEmpty()) {
+            System.out.println("No songs in the list.");
+        } else {
+            System.out.println("\nList of Songs:");
+            for (Song song : songList) {
+                System.out.println(song);
+            }
+        }
+    }
+
+    private static void listSongsOverPlays() {
+        System.out.print("Enter minimum play count: ");
+        int minPlays = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        System.out.println("\nSongs with more than " + minPlays + " plays:");
+        for (Song song : songList) {
+            if (song.getPlayCount() > minPlays) {
+                System.out.println(song);
+            }
+        }
+    }
+}
 
