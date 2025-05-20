@@ -1,0 +1,149 @@
+import java.util.Scanner;
+
+public class Main {
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final StudentPerformance performance = new StudentPerformance();
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\nStudent Performance Management System"); //all printed options to user
+            System.out.println("1. Add student");
+            System.out.println("2. Add module");
+            System.out.println("3. Enter mark");
+            System.out.println("4. View student grades");
+            System.out.println("5. Module stats");
+            System.out.println("6. Exit");
+            System.out.print("Choose option: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (choice) { //menu interface logic in switch case statement 
+                case 1 -> addStudent();
+                case 2 -> addModule();
+                case 3 -> enterMark();
+                case 4 -> viewGrades();
+                case 5 -> viewModuleStats();
+                case 6 -> {
+                    System.out.println("Goodbye!"); 
+                    return;
+                }
+                default -> System.out.println("Invalid choice."); //error handling for invalid menu choice
+            }
+        }
+    }
+
+    private static void addStudent() {
+        System.out.print("Enter student ID: ");
+        String id = scanner.nextLine().trim();
+        if (id.isEmpty() || id.isBlank()) {
+            System.out.println("Invalid student ID. Please try again.");
+            return;
+        }
+
+        System.out.print("Enter student name: "); //entering student name to save to system
+        String name = scanner.nextLine().trim();
+        if (name.isEmpty() || name.isBlank()) {
+            System.out.println("Invalid name. Please try again."); //error handling if student name cant be found
+            return;
+        }
+
+        Student s = new Student(id, name);
+        performance.addStudent(s);
+        System.out.println("Student added.");
+    }
+
+
+    private static void addModule() { //to add module to system
+        System.out.print("Enter module code: ");
+        String code = scanner.nextLine();
+        System.out.print("Enter module name: ");
+        String name = scanner.nextLine();
+        performance.addModule(new Module(code, name));
+        System.out.println("Module added."); 
+    }
+
+    private static void enterMark() { //to add mark for module
+        System.out.print("Enter student ID: ");
+        String studentID = scanner.nextLine().trim();
+        Student student = performance.findStudent(studentID);
+        if (student == null) {
+            System.out.println("Student not found.");
+            return; //error handling if student cant be found
+        }
+
+        System.out.print("Enter module code: ");
+        String moduleCode = scanner.nextLine().trim();
+        Module module = performance.findModule(moduleCode);
+        if (module == null) {
+            System.out.println("Module not found.");
+            return; //error handling if module cant be found
+        }
+
+        System.out.print("Enter mark (0-100): ");
+        int mark;
+        try {
+            mark = Integer.parseInt(scanner.nextLine().trim());
+            if (mark < 0 || mark > 100) {
+                System.out.println("Invalid mark. Must be between 0 and 100.");
+                return; //error handling for marks
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a numeric mark.");
+            return;
+        }
+
+        module.addOrUpdateMark(studentID, mark);
+        System.out.println("Mark added for " + student.getName() + " in " + module.getModuleName());
+    }
+
+
+    private static void viewGrades() { //option to view student grades
+        for (Student s : performance.getStudents()) {
+            System.out.println("\n" + s);
+            for (Module m : performance.getModules()) {
+                Integer mark = m.getMark(s.getStudentID());
+                if (mark != null) {
+                    String grade = GradeCalculator.calculateGrade(mark);
+                    System.out.println("  " + m.getModuleCode() + ": " + mark + "% - " + grade);
+                }
+            }
+        }
+    }
+
+    private static void viewModuleStats() { //option to view module stats
+        for (Module m : performance.getModules()) {
+            System.out.println("\nModule: " + m);
+            var marks = m.getAllMarks().values();
+            if (marks.isEmpty()) {
+                System.out.println("No marks entered.");
+                continue; //error handling if no marks entered
+            }
+
+            int sum = 0, min = 100, max = 0;
+            int[] gradeDist = new int[5]; // A, B, C, D, F
+
+            for (int mark : marks) {
+                sum += mark;
+                if (mark < min) min = mark;
+                if (mark > max) max = mark;
+
+                if (mark >= 70) gradeDist[0]++;
+                else if (mark >= 60) gradeDist[1]++;
+                else if (mark >= 50) gradeDist[2]++;
+                else if (mark >= 40) gradeDist[3]++;
+                else gradeDist[4]++; //grade calculator
+            }
+
+            double mean = (double) sum / marks.size();
+            System.out.printf("Mean: %.2f%%, Min: %d%%, Max: %d%%\n", mean, min, max);
+
+            String[] grades = { "A", "B", "C", "D", "F" };
+            for (int i = 0; i < grades.length; i++) {
+                int count = gradeDist[i];
+                double percent = (count * 100.0) / marks.size();
+                System.out.printf("  %s: %d (%.1f%%)\n", grades[i], count, percent); //calculations for grade to marks
+            }
+        }
+    }
+}
